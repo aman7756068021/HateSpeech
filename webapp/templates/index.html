@@ -1,0 +1,247 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Disease</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/particles.css' %}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="{% static 'js/animations.js'%}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.11.2/css/all.css"
+      integrity="sha384-zrnmn8R8KkWl12rAZFt4yKjxplaDaT7/EUkKm7AovijfrQItFWR7O/JJn4DAa/gx"
+      crossorigin="anonymous"
+    />
+    <style>
+      body,
+      html {
+        background-image: url(https://ideogram.ai/api/images/direct/SMYv7_WnRl6ranUisiprSQ.png);
+        background-size: cover; /* This ensures the image covers the entire background */
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      .user_card {
+        width: 350px;
+        margin-top: auto;
+        margin-bottom: auto;
+        background: #08B008B;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px;
+      }
+      .form_container {
+        margin-top: 20px;
+      }
+
+      #form-title {
+        color: #fff;
+      }
+
+      .login_btn {
+        width: 100%;
+        background: #33ccff !important;
+        color: white !important;
+      }
+      .login_btn:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+      .login_container {
+        padding: 0 2rem;
+      }
+      .input-group-text {
+        background: #f7ba5b !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+      }
+      .input_user,
+      .input_pass:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+      }
+
+      #messages {
+        background-color: grey;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      .btn1 {
+        width: 130px;
+        height: 40px;
+        text-align: center
+        line-height: 42px;
+        padding: 0;
+        border: none;
+        background: rgb(255, 27, 0);
+        background: linear-gradient(
+          0deg,
+          rgba(255, 27, 0, 1) 0%,
+          rgba(251, 75, 2, 1) 100%
+        );
+        display: block;
+        cursor: pointer;
+        text-transform: uppercase;
+        outline: none;
+        overflow: hidden;
+        color: #fff;
+        font-weight: 700;
+        font-size: 15px;
+        margin: 0 auto;
+        margin-left: 35%;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn1 span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn1:before,
+      .btn1:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #f0094a;
+        box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003,
+          4px 4px 5px 0px #0002;
+        transition: 400ms ease all;
+      }
+
+      .btn1:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+
+      .btn1:hover:before,
+      .btn1:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+      }
+
+      .btn1:hover {
+        color: #f0094a;
+        background: transparent;
+        box-shadow: none;
+      }
+
+        /* Add hover effect */
+        .ml3:hover {
+          transform: perspective(100px) rotateX(20deg); /* Adjust angle for hover effect */
+        }
+    </style>
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
+    ></script>
+
+    <h1 class="ml3" style="text-align: center; color: #fff"></h1>
+    <h2
+      class="ml3"
+      style="
+        text-align: center;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        transform: perspective(100px) rotateX(10deg);
+        transition: transform 0.3s;
+      "
+    >
+      PLEASE UPLOAD SPEECH
+    </h2>
+
+    <form
+      action="{% url 'predictImage' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div style="text-align: center">
+        <input
+          type="file"
+          id="doc"
+          class="btn1"
+          style="border-radius: 50px; margin-bottom: 20px; display: none"
+          name="document"
+        />
+        <label
+          for="doc"
+          class="btn1"
+          style="
+            cursor: pointer;
+            background-color: #32cd32;
+            color: #000000;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 50s;
+            display: block;
+            width: 150px;
+            margin: 0 auto;
+          "
+        >
+          <span>Choose File</span>
+        </label>
+        <br />
+        <button
+          class="btn1"
+          onclick="submit"
+          type="submit"
+          style="
+            background-color: #32cd32;
+            color: #000000;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            display: block;
+            width: 150px;
+            margin: 0 auto;
+            text-align: center;
+          "
+        >
+          <span>Upload</span>
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="particles-js"
+      style="
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        position: fixed;
+        background-image: linear-gradient(to top, #2c5f2d 0%, #97d9e1 100%);
+      "
+    ></div>
+    <script src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>
+{% endblock content %}

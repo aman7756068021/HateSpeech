@@ -1,0 +1,54 @@
+{% load static %}
+
+<style>
+  .hello-msg {
+    font-size: 27px;
+    color: #fff;
+    margin-right: 20px;
+    font-family: "Serif";
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <style>
+    .logo {
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  </style>
+
+  <img
+    src="https://ideogram.ai/api/images/direct/3eiq4MgyQ1iwS2M4rpeXVA.png"
+    alt="Description of the image"
+    width="100"
+    height="65"
+    class="logo"
+  />
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a
+          class="nav-link"
+          href="{% url 'home' %}"
+          style="font-size: 27px; font-family: 'cursive'"
+          >Dashboard</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <span class="hello-msg">Hello, {{request.user}}</span>
+  <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+</nav>
